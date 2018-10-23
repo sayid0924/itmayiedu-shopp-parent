@@ -23,7 +23,7 @@ public interface RoleManageDao {
 
 
     @Delete("delete from mb_role where id=#{RoleId}")
-    Integer delete(Long RoleId);
+    Integer delete(@Param("RoleId") Long RoleId);
 
 
     @Select("update mb_role set RoleDisable=1  where id=#{RoleId}")

@@ -41,7 +41,7 @@ public class EmailService implements MessageAdapter {
 		// 内容
 		simpleMailMessage.setText(text.replace("{}", email));
 		// 发送邮件
-		javaMailSender.send(simpleMailMessage);
+//		javaMailSender.send(simpleMailMessage);
 		log.info("消息服务平台发送邮件:{}完成", email);
 	}
 

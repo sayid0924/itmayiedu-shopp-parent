@@ -39,6 +39,8 @@ public class MemberServiceImpl extends BaseApiService implements MemberService {
 		if (user == null) {
 			return setResultError("未查找到用户信息.");
 		}
+		String memberToken = (String) baseRedisService.getString(String.valueOf(user.getId()));
+		user.setRCToken(memberToken);
 		return setResultSuccess(user);
 	}
 
@@ -49,21 +51,26 @@ public class MemberServiceImpl extends BaseApiService implements MemberService {
 		if (StringUtils.isEmpty(password)) {
 			return setResultError("密码不能为空.");
 		}
+
 		String newPassword = MD5Util.MD5(password);
 		user.setPassword(newPassword);
 		Integer result = memberDao.insertUser(user);
 		if (result <= 0) {
-			return setResultError("注册用户信息失败.");
+			return setResultError("添加用户信息失败.");
 		}
+
 		// 采用异步方式发送消息
-		String email = user.getEmail();
-		String json = emailJson(email);
-		log.info("####会员服务推送消息到消息服务平台####json:{}", json);
-		sendMsg(json);
-		return setResultSuccess("用户注册成功.");
+//		String email = user.getEmail();
+//		String json = emailJson(email);
+//		log.info("####会员服务推送消息到消息服务平台####json:{}", json);
+//		sendMsg(json);
+
+		return setResultSuccess("用户添加成功.");
+
 	}
 
 	private String emailJson(String email) {
+
 		JSONObject rootJson = new JSONObject();
 		JSONObject header = new JSONObject();
 		header.put("interfaceType", Constants.MSG_EMAIL);
@@ -109,13 +116,16 @@ public class MemberServiceImpl extends BaseApiService implements MemberService {
 		// 4.存放在redis中，key为token value 为 userid
 		Integer userId = userEntity.getId();
 		log.info("####用户信息token存放在redis中... key为:{},value", memberToken, userId);
-		baseRedisService.setString(memberToken, userId + "", Constants.TOKEN_MEMBER_TIME);
+		baseRedisService.setString(String.valueOf(userId), memberToken, Constants.TOKEN_MEMBER_TIME);
 		// 5.直接返回token
-//		JSONObject jsonObject = new JSONObject();
-//		jsonObject.put("memberToken", memberToken);
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("memberToken", memberToken);
 
 		userEntity.setRCToken(memberToken);
-		
+
+//		String json = emailJson("我是谁");
+//		sendMsg(json);
+
 		return setResultSuccess(userEntity);
 
 	}
@@ -167,6 +177,7 @@ public class MemberServiceImpl extends BaseApiService implements MemberService {
 		}else {
 			// 密码不相同
 			return setResultError("用户名密码不一致，没更新的权限");
+
 		}
 	}
 

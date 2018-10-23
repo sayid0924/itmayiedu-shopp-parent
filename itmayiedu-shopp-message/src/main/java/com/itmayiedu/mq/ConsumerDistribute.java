@@ -27,6 +27,7 @@ public class ConsumerDistribute {
 		if (StringUtils.isEmpty(json)) {
 			return;
 		}
+
 		JSONObject rootJSON = new JSONObject().parseObject(json);
 		JSONObject header = rootJSON.getJSONObject("header");
 		String interfaceType = header.getString("interfaceType");
