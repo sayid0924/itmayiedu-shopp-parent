@@ -36,6 +36,12 @@ public class RoleManageServiceImpl extends BaseApiService implements RoleManagem
         if (StringUtils.isEmpty(roleAdd.getRoleType())) {
             return setResultError("RoleType不能为空.");
         }
+        if(roleAdd.getRoleLeve()==null){
+            roleAdd.setRoleLeve(0);
+        }
+        if(roleAdd.getRoleDisable()==null){
+            roleAdd.setRoleDisable(0);
+        }
 
         Integer result = roleManageDao.insertUser(roleAdd);
         if (result <= 0) {

@@ -69,7 +69,7 @@ public class ApiDocController {
             //后台管理系统
                 String packageName = "com.itmayiedu.api.service";
                 apiDoc = new GeneratorApiDoc().setInfo(new ApiDocInfo().setTitle("博本医疗系统后台管理文档")
-                        .setVersion("1.0")
+                        .setVersion("")
                         .setDescription("")
                 ).generator(packageName);
             return apiDoc;
@@ -93,6 +93,6 @@ public class ApiDocController {
                 .getApiOfMethod(methodUUID);
         System.err.println(JsonUtil.toString(detail));
         return detail;
-
     }
+
 }

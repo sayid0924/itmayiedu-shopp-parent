@@ -30,9 +30,9 @@ public interface NurseWorkTimeService {
     })
     // 返回参数
     @ApiRespParams({
+
             @ApiParam(name = "code", dataType = DataType.NUMBER, defaultValue = "0", description = "状态编码"),
             @ApiParam(name = "message", dataType = DataType.STRING, defaultValue = "操作成功", description = "提示信息"),
-
 
     })
     // 更新单个医生诊室门卡

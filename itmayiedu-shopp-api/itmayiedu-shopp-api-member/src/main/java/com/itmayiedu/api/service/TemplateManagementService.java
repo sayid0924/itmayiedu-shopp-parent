@@ -9,7 +9,7 @@ import com.itmayiedu.base.ResponseBase;
 import com.itmayiedu.entity.DeviceManage.DeviceEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Api(name = "模版管理", order = 7)
+@Api(name = "模版管理", order = 8)
 @RequestMapping("/template")
 public interface TemplateManagementService {
 

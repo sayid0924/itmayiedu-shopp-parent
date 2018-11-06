@@ -1,14 +1,10 @@
 package com.itmayiedu.api.serivce.impl;
 
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
 import com.itmayiedu.api.service.DeviceService;
 import com.itmayiedu.base.BaseApiService;
 import com.itmayiedu.base.ResponseBase;
 import com.itmayiedu.dao.DeviceDao;
-import com.itmayiedu.dao.MemberDao;
 import com.itmayiedu.entity.DeviceManage.DeviceEntity;
-import com.itmayiedu.entity.RoleManage.RoleEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +17,8 @@ public class DeviceServiceImpl extends BaseApiService implements DeviceService {
 
     @Autowired
     private DeviceDao deviceDao;
+
+
 
     @Override
     public ResponseBase DeviceAdd(DeviceEntity deviceEntity) {
@@ -64,6 +62,8 @@ public class DeviceServiceImpl extends BaseApiService implements DeviceService {
         return setResultSuccess(result);
     }
 
+
+
     @Override
     public ResponseBase DeviceUpdate(DeviceEntity deviceEntity) {
         if (deviceEntity.getId()==null ) {
@@ -78,6 +78,8 @@ public class DeviceServiceImpl extends BaseApiService implements DeviceService {
         }
         return setResultSuccess("更新成功");
     }
+
+
 
 
 //    /**

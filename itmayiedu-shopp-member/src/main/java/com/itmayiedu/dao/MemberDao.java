@@ -1,5 +1,7 @@
 package com.itmayiedu.dao;
 
+import com.github.pagehelper.Page;
+import com.itmayiedu.entity.RoleManage.RoleEntity;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -21,5 +23,9 @@ public interface MemberDao {
 
 	@Select("update mb_user set password=#{password}  where id=#{userId}")
 	UserEntity changePassword(@Param("userId") Long userId,@Param("password") String password );
+
+
+	@Select("select id,username,password,phone,email,created,updated from mb_user ")
+	Page<UserEntity> findAll();
 
 }

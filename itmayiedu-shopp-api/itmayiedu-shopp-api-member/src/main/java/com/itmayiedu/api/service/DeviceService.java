@@ -101,9 +101,4 @@ public interface DeviceService {
     ResponseBase DeviceUpdate(DeviceEntity deviceEntity);
 
 
-
-
-
-
-
 }

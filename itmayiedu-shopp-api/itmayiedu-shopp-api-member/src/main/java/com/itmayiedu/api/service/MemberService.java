@@ -114,4 +114,34 @@ public interface MemberService {
 	ResponseBase changePassword(ChangePassword changePassword);
 
 
+
+
+	@ApiAction(name = "分页查找用户", mapping = "member/findall", method = Method.GET)
+	// 请求参数
+	@ApiReqParams(type = ParamType.JSON,  value = {
+			@ApiParam(name = "pageNo", dataType = DataType.NUMBER,  description = "页码",required = true),
+			@ApiParam(name = "pageSize", dataType = DataType.NUMBER,  description = "返回条数",required = true)
+	})
+	// 返回参数
+	@ApiRespParams({
+
+			@ApiParam(name = "code", dataType = DataType.NUMBER, defaultValue = "0", description = "状态编码"),
+			@ApiParam(name = "message", dataType = DataType.STRING, defaultValue = "操作成功", description = "提示信息"),
+			@ApiParam(name = "data", dataType = DataType.OBJECT, defaultValue = "null", description = "响应数据", object = "user"),
+			@ApiParam(name = "id", dataType = DataType.NUMBER,description = "用户ID",belongTo = "user"),
+			@ApiParam(name = "username", dataType = DataType.STRING,description = "用户名",belongTo = "user"),
+			@ApiParam(name = "password", dataType = DataType.STRING,description = "密码",belongTo = "user"),
+			@ApiParam(name = "phone", dataType = DataType.STRING,description = "手机号码",belongTo = "user"),
+			@ApiParam(name = "created", dataType = DataType.STRING,description = "创建时间",belongTo = "user"),
+			@ApiParam(name = "updated", dataType = DataType.STRING,description = "更新时间",belongTo = "user"),
+			@ApiParam(name = "RCToken", dataType = DataType.STRING,description = "RCToken",belongTo = "user"),
+			@ApiParam(name = "email", dataType = DataType.STRING,description = "邮箱",belongTo = "user")
+
+	})
+
+	//分页查找角色
+	@RequestMapping("/findall")
+	ResponseBase FindAllUser(Integer pageNo, Integer pageSize);
+
+
 }

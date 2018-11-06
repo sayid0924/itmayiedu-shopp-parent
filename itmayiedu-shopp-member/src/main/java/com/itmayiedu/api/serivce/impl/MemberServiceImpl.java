@@ -1,6 +1,9 @@
 package com.itmayiedu.api.serivce.impl;
 
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.itmayiedu.entity.RoleManage.RoleEntity;
 import com.itmayiedu.entity.req.ChangePassword;
 import com.itmayiedu.entity.req.ReqUser;
 import org.apache.activemq.command.ActiveMQQueue;
@@ -109,7 +112,7 @@ public class MemberServiceImpl extends BaseApiService implements MemberService {
 //		String newPassWrod = MD5Util.MD5(password);
 		UserEntity userEntity = memberDao.login(username, password);
 		if (userEntity == null) {
-			return setResultError("账号或者密码不能正确");
+			return setResultError("账号或者密码不正确");
 		}
 		// 3.如果账号密码正确，对应生成token
 		String memberToken = TokenUtils.getMemberToken();
@@ -179,6 +182,16 @@ public class MemberServiceImpl extends BaseApiService implements MemberService {
 			return setResultError("用户名密码不一致，没更新的权限");
 
 		}
+	}
+
+	@Override
+	public ResponseBase FindAllUser(Integer pageNo, Integer pageSize) {
+		PageHelper.startPage(pageNo, pageSize);
+		Page<UserEntity> userEntities = memberDao.findAll();
+		if (userEntities == null) {
+			return setResultError("未查找到角色信息.");
+		}
+		return setResultSuccess(userEntities);
 	}
 
 }
