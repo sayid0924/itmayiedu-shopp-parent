@@ -13,6 +13,7 @@ public class RegisterMailboxProducer {
 
 	public void sendMsg(Destination destination, String json) {
 		jmsMessagingTemplate.convertAndSend(destination, json);
+
 	}
 
 }

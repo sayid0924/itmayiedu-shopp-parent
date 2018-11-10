@@ -1,6 +1,7 @@
 package com.itmayiedu.api.serivce.impl;
 
 
+import com.alibaba.druid.util.StringUtils;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.itmayiedu.api.service.RoleManagementService;
@@ -8,18 +9,21 @@ import com.itmayiedu.base.BaseApiService;
 import com.itmayiedu.base.ResponseBase;
 import com.itmayiedu.dao.RoleManageDao;
 import com.itmayiedu.entity.RoleManage.RoleEntity;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-
 public class RoleManageServiceImpl extends BaseApiService implements RoleManagementService {
 
     @Autowired
     private RoleManageDao roleManageDao;
+
+    public ResponseBase hystrixFallback(RoleEntity roleAdd) {
+        return setResultError("请求失败.");
+    }
 
     /**
      * 角色添加
@@ -28,6 +32,7 @@ public class RoleManageServiceImpl extends BaseApiService implements RoleManagem
      * @return
      */
     @Override
+    @HystrixCommand(fallbackMethod = "hystrixFallback")
     public ResponseBase RolemanageAdd(RoleEntity roleAdd) {
 
         if (StringUtils.isEmpty(roleAdd.getRoleName())) {
@@ -48,7 +53,6 @@ public class RoleManageServiceImpl extends BaseApiService implements RoleManagem
             return setResultError("添加失败.");
         }
         return setResultSuccess("添加成功");
-
     }
 
     /**
@@ -58,6 +62,7 @@ public class RoleManageServiceImpl extends BaseApiService implements RoleManagem
      * @return
      */
     @Override
+    @HystrixCommand(fallbackMethod = "hystrixFallback")
     public ResponseBase RolemanageDelete(Long RoleId) {
         if (RoleId == null) {
             return setResultError("RoleId不能为空.");
@@ -76,6 +81,7 @@ public class RoleManageServiceImpl extends BaseApiService implements RoleManagem
      * @return
      */
     @Override
+    @HystrixCommand(fallbackMethod = "hystrixFallback")
     public ResponseBase RolemanageDisable(Long RoleId) {
         if (RoleId == null) {
             return setResultError("RoleId不能为空.");
@@ -86,11 +92,13 @@ public class RoleManageServiceImpl extends BaseApiService implements RoleManagem
     }
 
     /**
-     *  查找单个角色
+     * 查找单个角色
+     *
      * @param RoleId
      * @return
      */
     @Override
+    @HystrixCommand(fallbackMethod = "hystrixFallback")
     public ResponseBase RolemanageFind(Long RoleId) {
         RoleEntity role = roleManageDao.findByID(RoleId);
         if (role == null) {
@@ -100,17 +108,21 @@ public class RoleManageServiceImpl extends BaseApiService implements RoleManagem
     }
 
     /**
-     *  分页查找角色
+     * 分页查找角色
+     *
      * @return
      */
     @Override
-    public ResponseBase RolemanageFindAll( Integer pageNo, Integer pageSize) {
+    @HystrixCommand(fallbackMethod = "hystrixFallback")
+    public ResponseBase RolemanageFindAll(Integer pageNo, Integer pageSize) {
         PageHelper.startPage(pageNo, pageSize);
-        Page<RoleEntity>  role = roleManageDao.findAll();
+        Page<RoleEntity> role = roleManageDao.findAll();
         if (role == null) {
             return setResultError("未查找到角色信息.");
         }
         return setResultSuccess(role);
     }
+
+
 
 }

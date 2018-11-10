@@ -6,6 +6,7 @@ import com.github.pagehelper.PageHelper;
 import com.itmayiedu.entity.RoleManage.RoleEntity;
 import com.itmayiedu.entity.req.ChangePassword;
 import com.itmayiedu.entity.req.ReqUser;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.apache.activemq.command.ActiveMQQueue;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,10 @@ public class MemberServiceImpl extends BaseApiService implements MemberService {
 	@Value("${messages.queue}")
 	private String MESSAGESQUEUE;
 
+
+
 	@Override
+	@HystrixCommand(fallbackMethod="hystrixFallback")
 	public ResponseBase findUserById(Long userId) {
 		UserEntity user = memberDao.findByID(userId);
 		if (user == null) {
@@ -48,6 +52,7 @@ public class MemberServiceImpl extends BaseApiService implements MemberService {
 	}
 
 	@Override
+	@HystrixCommand(fallbackMethod="hystrixFallback")
 	public ResponseBase regUser(@RequestBody UserEntity user) {
 		// 参数验证
 		String password = user.getPassword();
@@ -98,6 +103,7 @@ public class MemberServiceImpl extends BaseApiService implements MemberService {
 	 * @return
 	 */
 	@Override
+	@HystrixCommand(fallbackMethod="hystrixFallback")
 	public ResponseBase login(ReqUser user) {
 		// 1.验证参数
 		String username = user.getAccount();
@@ -134,6 +140,7 @@ public class MemberServiceImpl extends BaseApiService implements MemberService {
 	}
 
 	@Override
+	@HystrixCommand(fallbackMethod="hystrixFallback")
 	public ResponseBase findByTokenUser(String token) {
 		// 1.验证参数
 		if (StringUtils.isEmpty(token)) {
@@ -161,6 +168,7 @@ public class MemberServiceImpl extends BaseApiService implements MemberService {
 	 * @return
 	 */
 	@Override
+	@HystrixCommand(fallbackMethod="hystrixFallback")
 	public ResponseBase changePassword(ChangePassword changePassword) {
 
 		if (StringUtils.isEmpty(String.valueOf(changePassword.getMemberId()))) {
@@ -185,6 +193,7 @@ public class MemberServiceImpl extends BaseApiService implements MemberService {
 	}
 
 	@Override
+	@HystrixCommand(fallbackMethod="hystrixFallback")
 	public ResponseBase FindAllUser(Integer pageNo, Integer pageSize) {
 		PageHelper.startPage(pageNo, pageSize);
 		Page<UserEntity> userEntities = memberDao.findAll();
@@ -193,5 +202,11 @@ public class MemberServiceImpl extends BaseApiService implements MemberService {
 		}
 		return setResultSuccess(userEntities);
 	}
+
+
+	public ResponseBase hystrixFallback() {
+		return setResultError("请求失败.");
+	}
+
 
 }

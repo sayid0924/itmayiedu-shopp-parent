@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+    <classPathEntry location="C:\Users\Bben\.m2\repository\mysql\mysql-connector-java\5.1.46\mysql-connector-java-5.1.46.jar"/>
+    <context id="context1">
+
+        <property name="javaFileEncoding" value="UTF-8"/>
+
+        <!--生成的实体类实现序列化接口	【扩展插件】-->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+
+        <!--生成的实体类重写toString方法-->
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+
+        <!-- 是否生成注释 -->
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <!-- 数据库连接 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/itmayiedu-member"
+                        userId="root" password="123456" />
+
+        <!-- 生成的包名和工程名 -->
+        <javaModelGenerator targetPackage="com.itmayiedu.member.model"
+                            targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!-- xml映射文件   -->
+        <sqlMapGenerator targetPackage="com.itmayiedu.member.mapping"
+                         targetProject="src/main/java" />
+        <!--  mapper接口    -->
+        <javaClientGenerator targetPackage="com.itmayiedu.member.mapper"
+                             targetProject="src/main/java" type="XMLMAPPER" />
+
+        <!-- 数据库表 以及是否生成example-->
+        <!--<table  tableName="mb_test" domainObjectName="Mbtest"-->
+                         <!--enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"-->
+                         <!--enableSelectByExample="false" selectByExampleQueryId="false" >-->
+    <!--</table>-->
+
+        <table tableName="mb_test">
+        <generatedKey column="id" sqlStatement="Mysql" identity="true" />
+        </table>
+
+    </context>
+</generatorConfiguration>
