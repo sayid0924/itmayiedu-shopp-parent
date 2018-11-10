@@ -5,7 +5,7 @@ import com.apidoc.enumeration.DataType;
 import com.apidoc.enumeration.Method;
 import com.apidoc.enumeration.ParamType;
 import com.itmayiedu.base.ResponseBase;
-import com.itmayiedu.mybatis.model.Mbtest;
+import com.itmayiedu.mybatis.model.MbTest;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Map;
@@ -34,7 +34,7 @@ public interface TestApiService {
     })
     // 添加
 	@RequestMapping("/testResponseBase")
-	public ResponseBase testResponseBase(Mbtest mbtest);
+	public ResponseBase testResponseBase(MbTest mbtest);
 
 	@RequestMapping("/testRedis")
 	public ResponseBase settestRedis(String key,String value);
