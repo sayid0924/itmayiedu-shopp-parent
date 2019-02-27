@@ -10,10 +10,11 @@
         <module name="itmayiedu-shopp-common" />
         <module name="itmayiedu-shopp-eurekaserver" />
         <module name="itmayiedu-shopp-member" />
-        <module name="itmayiedu-shopp-message" />
+        <module name="netty-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="common" target="1.8" />
       <module name="itmayiedu-shopp-api" target="1.8" />
       <module name="itmayiedu-shopp-api-member" target="1.8" />
       <module name="itmayiedu-shopp-common" target="1.8" />
@@ -22,6 +23,7 @@
       <module name="itmayiedu-shopp-message" target="1.8" />
       <module name="itmayiedu-shopp-parent" target="1.8" />
       <module name="itmyieduhistest" target="1.8" />
+      <module name="netty-service" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

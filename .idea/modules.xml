@@ -7,8 +7,8 @@
       <module fileurl="file://$PROJECT_DIR$/itmayiedu-shopp-common/itmayiedu-shopp-common.iml" filepath="$PROJECT_DIR$/itmayiedu-shopp-common/itmayiedu-shopp-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/itmayiedu-shopp-eurekaserver/itmayiedu-shopp-eurekaserver.iml" filepath="$PROJECT_DIR$/itmayiedu-shopp-eurekaserver/itmayiedu-shopp-eurekaserver.iml" />
       <module fileurl="file://$PROJECT_DIR$/itmayiedu-shopp-member/itmayiedu-shopp-member.iml" filepath="$PROJECT_DIR$/itmayiedu-shopp-member/itmayiedu-shopp-member.iml" />
-      <module fileurl="file://$PROJECT_DIR$/itmayiedu-shopp-message/itmayiedu-shopp-message.iml" filepath="$PROJECT_DIR$/itmayiedu-shopp-message/itmayiedu-shopp-message.iml" />
       <module fileurl="file://$PROJECT_DIR$/itmayiedu-shopp-parent.iml" filepath="$PROJECT_DIR$/itmayiedu-shopp-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/netty-service/netty-service.iml" filepath="$PROJECT_DIR$/netty-service/netty-service.iml" />
     </modules>
   </component>
 </project>

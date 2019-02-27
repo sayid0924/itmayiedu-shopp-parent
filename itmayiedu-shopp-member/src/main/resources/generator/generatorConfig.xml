@@ -24,17 +24,17 @@
                         userId="root" password="123456" />
 
         <!-- 生成的包名和工程名 -->
-        <javaModelGenerator targetPackage="com.itmayiedu.member.model"
+        <javaModelGenerator targetPackage="com.jzr.member.model"
                             targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
         <!-- xml映射文件   -->
-        <sqlMapGenerator targetPackage="com.itmayiedu.member.mapping"
+        <sqlMapGenerator targetPackage="com.jzr.member.mapping"
                          targetProject="src/main/java" />
         <!--  mapper接口    -->
-        <javaClientGenerator targetPackage="com.itmayiedu.member.mapper"
+        <javaClientGenerator targetPackage="com.jzr.member.mapper"
                              targetProject="src/main/java" type="XMLMAPPER" />
 
         <!-- 数据库表 以及是否生成example-->

@@ -24,13 +24,13 @@
                         userId="root" password="123456" />
 
         <!-- 生成的包名和工程名 -->
-        <javaModelGenerator targetPackage="com.itmayiedu.mybatis.model"
+        <javaModelGenerator targetPackage="com.jzr.mybatis.model"
                             targetProject="src/main/java"/>
         <!-- xml映射文件   -->
-        <sqlMapGenerator targetPackage="com.itmayiedu.mybatis.mapper"
+        <sqlMapGenerator targetPackage="com.jzr.mybatis.mapper"
                          targetProject="src/main/java" />
         <!--  mapper接口    -->
-        <javaClientGenerator targetPackage="com.itmayiedu.mybatis.mapper"
+        <javaClientGenerator targetPackage="com.jzr.mybatis.mapper"
                              targetProject="src/main/java" type="XMLMAPPER" />
 
         <!-- 数据库表 以及生成example-->
